@@ -1,97 +1,64 @@
 #include "main.h"
+
+void print_buffer(char buffer[], int *buff_ind);
+
 /**
- * _printf - prints formatted string to standard output
- * @format: the formatted string
- * Return: number of characters printed
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
 int _printf(const char *format, ...)
 {
-int i = 0, count = 0;
-va_list parg; /* pointer to variable argument list */
+int i, printed = 0, printed_chars = 0;
+int flags, width, precision, size, buff_ind = 0;
+va_list list;
+char buffer[BUFF_SIZE];
 
 if (format == NULL)
 return (-1);
 
-if (!format)
-return (0);
-va_start(parg, format);
-while (format[i] != '\0')
+va_start(list, format);
+
+for (i = 0; format && format[i] != '\0'; i++)
 {
-if (format[i] == '%')
+if (format[i] != '%')
 {
-i++;
-if (format[i] == '\0')
-return (-1);
-count += switch_case(format[i], parg);
-i++;
+buffer[buff_ind++] = format[i];
+if (buff_ind == BUFF_SIZE)
+print_buffer(buffer, &buff_ind);
+/* write(1, &format[i], 1);*/
+printed_chars++;
 }
 else
 {
-putchar(format[i]);
-count++;
-i++;
+print_buffer(buffer, &buff_ind);
+flags = get_flags(format, &i);
+width = get_width(format, &i, list);
+precision = get_precision(format, &i, list);
+size = get_size(format, &i);
+++i;
+printed = handle_print(format, &i, list, buffer,
+flags, width, precision, size);
+if (printed == -1)
+return (-1);
+printed_chars += printed;
 }
 }
-va_end(parg);
-return (count);
-}
 
-/**
- * print_rev - function that prints a string in reverse order
- * @s: pointer to string to be printed
- * Return: void
- */
-int print_rev(char *s)
-{
-int len = 0; /* Store the strirng length */
-int i = 0;   /* loop counter */
-int count = 0;
+print_buffer(buffer, &buff_ind);
 
-if (s != NULL)
-{
+va_end(list);
 
-len = _strlen(s);
-
-for (i = (len - 1); i >= 0; i--)
-{
-putchar(*(s + i));
-count++;
-}
-}
-return (count);
-}
-
-/**
- * _strlen - returns the length of the string passed
- * @s: the sting to find the length
- * Return: int length of string
- */
-
-int _strlen(char *s)
-{
-int len = 0; /* store string length */
-int i = 0;   /* loop counter */
-
-while (s[i++] != '\0')
-len++;
-return (len);
+return (printed_chars);
 }
 /**
- * _strcpy - copies the string src to dest
- * @src: source string to be copied
- * @dest: where to copy src
- * Return: void
+ * print_buffer - Prints the contents of the buffer if it exist
+ * @buffer: Array of chars
+ * @buff_ind: Index at which to add next char, represents the length.
  */
-char *_strcpy(char *dest, char *src)
+void print_buffer(char buffer[], int *buff_ind)
 {
-int i = 0; /* loop counter */
-
-while (src[i] != '\0')
-{
-dest[i] = src[i];
-i++;
-}
-dest[i] = '\0';
-
-return (dest);
+if (*buff_ind > 0)
+write(1, &buffer[0], *buff_ind);
+*buff_ind = 0;
 }
