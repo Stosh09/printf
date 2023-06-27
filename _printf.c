@@ -8,7 +8,7 @@
 int _printf(const char *format, ...)
 {
 	int i = 0, cnt = 0;
-	va_list parg;                      /* pointer to variable argument list */
+	va_list parg;
 
 	if (format == NULL)
 		return (-1);

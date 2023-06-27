@@ -23,7 +23,7 @@ int pr_string(va_list parg)
 			s++;
 			cnt++;
 		}
-		
+
 	}
 
 	return (cnt);

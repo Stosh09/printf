@@ -22,7 +22,7 @@ int switch_case2(char c, va_list parg)
 			break;
 		case 'R':
 			string = va_arg(parg, char *);
-			if 
+			if
 (string == NULL)
 				cnt += _printf("%s", "(null)");
 			else
@@ -35,7 +35,7 @@ int switch_case2(char c, va_list parg)
 			else
 				cnt += print_rev(string);
 			break;
-			
+
 		default:
 			putchar('%');
 			putchar(c);

@@ -19,7 +19,7 @@ int print_unsignedInt(va_list parg, int base)
 		putchar('0');
 		return (1);
 	}
-	
+
 	while (n > 0)
 	{
 		modulus = n % base;

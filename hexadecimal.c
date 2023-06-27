@@ -28,7 +28,7 @@ int hexa_decimal(va_list parg, int base)
 		i++;
 
 	}
- 
+
 	un_int[i] = '\0';
 	cnt += print_rev(un_int);
 

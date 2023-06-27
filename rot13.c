@@ -9,8 +9,8 @@ int print_rot13(char *s)
 {
 	char s1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char s2[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-	int i = 0;						
-	int j = 0;						
+	int i = 0;
+	int j = 0;
 	int cnt = 0;
 	char *string = malloc(sizeof(char) * (1 + _strlen(s)));
 
