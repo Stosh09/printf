@@ -36,6 +36,5 @@ int print_stringCustomized(va_list parg)
 
 		}
 	}
-
 	return (cnt);
 }
