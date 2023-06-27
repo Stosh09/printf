@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-  * print_stringCustomized - prints string customised 4 non printable characters
+  * print_stringCustomized-prints string customised 4 non printable characters
   * @parg: pointer to variable argument list
   * Return: number of characters printed
   */
